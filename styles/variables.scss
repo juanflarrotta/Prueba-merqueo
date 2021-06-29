@@ -9,6 +9,10 @@
     font-weight: $weight;
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src        : url(../public/font/Poppins-Regular.ttf);
+}
 
 $gris-oscuro: #2e2e2e;
 $gris       : #e5e5e5;

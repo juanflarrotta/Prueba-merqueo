@@ -1,6 +1,7 @@
 import differenceInDays from "date-fns/differenceInDays";
 import differenceInHours from "date-fns/differenceInHours";
 import differenceInMinutes from "date-fns/differenceInMinutes";
+import styles from "./styles.module.scss";
 
 const MINUTES_IN_HOUR = 60;
 const HOURS_IN_DAY = 24;
@@ -25,5 +26,5 @@ export default function Time(props) {
     text = `Hace ${days} ${days === 1 ? "día" : "días"}`;
   }
 
-  return <time className={className}>{text}</time>;
+  return <time className={styles.date}>{text}</time>;
 }

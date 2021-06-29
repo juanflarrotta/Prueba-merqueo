@@ -1,26 +1,27 @@
 @import "../../styles/variables.scss";
 
 .btn {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-  padding: 5px 15px;
-  font-family: "Open Sans", sans-serif;
-  @include fontSize(0.75, 400);
+    border          : 0;
+    background-color: transparent;
+    cursor          : pointer;
+    @include fontSize(0.75, 400);
 }
 
 .icon {
-  display: block;
-  width: 20px;
-  height: 14px;
+    display: block;
+    width  : 20px;
+    height : 14px;
 }
 
 .primary {
-  color: $gris-oscuro;
-  display: block;
+    color  : $gris-oscuro;
+    display: block;
 }
 
 .secondary {
-  background-color: $color-principal;
-  color: $blanco;
+    background-color: $color-principal;
+    color           : $blanco;
+    padding         : 5px 15px;
+    border-radius   : 3px;
+    margin-top      : 15px;
 }
