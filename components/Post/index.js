@@ -105,6 +105,7 @@ export default function Post(props) {
             updateReactions={updateReactions}
             liked={liked}
             isShown={areReactionsShown}
+            clickHandler={setAreReactionsShown}
           />
           <Btn
             text="Comentar"
