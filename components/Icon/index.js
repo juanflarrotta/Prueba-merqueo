@@ -195,5 +195,5 @@ export default function Icon(props) {
       </svg>
     ),
   };
-  return icons[icon] || null;
+  return <span data-testid="btn-icon">{icons[icon]}</span> || null;
 }
