@@ -1,21 +1,29 @@
-import styles from './styles.module.scss'
-export default function Input({ placeholder, onBlur, onFocus }) {
-    return (
-        <input
-            type="text"
-            onBlur={() => {
-                if (onBlur) {
-                    onBlur()
-                }
-            }}
-            onFocus={() => {
-                if (onFocus) {
-                    onFocus()
-                }
-            }}
+import styles from "./styles.module.scss";
 
-            className={styles.input}
-            placeholder={placeholder}
-        />
-    )
+export default function Input({
+  value,
+  placeholder,
+  onBlur,
+  onFocus,
+  handleChange,
+}) {
+  return (
+    <input
+      type="text"
+      onBlur={(e) => {
+        if (onBlur) {
+          onBlur(e);
+        }
+      }}
+      onFocus={(e) => {
+        if (onFocus) {
+          onFocus(e);
+        }
+      }}
+      value={value}
+      onChange={handleChange}
+      className={styles.input}
+      placeholder={placeholder}
+    />
+  );
 }
