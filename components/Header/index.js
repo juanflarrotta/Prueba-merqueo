@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import styles from "./styles.module.scss";
+import styles from "./header.module.scss";
 import Btn from "../Btn/index";
 
 export default function Header() {

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import styles from "./styles.module.scss";
+import styles from "./posts.module.scss";
 import Post from "../Post";
 import DataContext from "../../context";
 

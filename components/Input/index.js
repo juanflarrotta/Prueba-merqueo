@@ -1,4 +1,4 @@
-import styles from "./styles.module.scss";
+import styles from "./input.module.scss";
 
 export default function Input({
   value,

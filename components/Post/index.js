@@ -1,22 +1,47 @@
 import { useContext, useState } from "react";
 
 import DataContext from "../../context";
-import styles from "./styles.module.scss";
 import Btn from "../Btn";
 import Time from "../Time";
-import Input from "../Input";
+import PostFooter from "./postFooter";
+import PostComments from "./postComments";
+
+import styles from "./post.module.scss";
 
 export default function Post(props) {
+  const { uuid, text, timestamp, reactions, comments, user } = props;
+
   const [commentsAreShown, setCommentsAreShown] = useState(false);
-  const [ticketAreShown, setTicketAreShown] = useState(false);
-  const { users } = useContext(DataContext);
-  const { text, timestamp, reactions, comments, user } = props;
+  const [ticketIsShown, setTicketIsShown] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const { users, updatePost } = useContext(DataContext);
+
   const hasReactions = reactions && reactions.length > 0;
   const hasComments = comments && comments.length > 0;
-
   const postUser = users.find((u) => u.uuid === user);
-  const commentsShownClass = commentsAreShown ? styles.commentsShown : "";
-  const ticketShownClass = ticketAreShown ? styles.ticketShown : "";
+
+  const onChange = (e) => {
+    const { value } = e.target;
+    setNewComment(value);
+  };
+
+  const publishComment = () => {
+    if (newComment !== "") {
+      updatePost(uuid, {
+        comments: [
+          {
+            user_id: postUser.uuid,
+            timestamp: new Date().getTime(),
+            text: newComment,
+          },
+        ],
+      });
+      setCommentsAreShown(true);
+      setTicketIsShown(false);
+      setNewComment("");
+    }
+  };
+
   return (
     <article className={styles.post}>
       <div className={styles.post__content}>
@@ -37,21 +62,20 @@ export default function Post(props) {
         <div className={styles.post__reaction}>
           {hasReactions && (
             <div className={styles.post__images}>
-              {hasReactions &&
-                reactions.map((reaction) => {
-                  const reactionUser = users.find(
-                    (u) => u.uuid === reaction.user_id
-                  );
-                  return (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      key={reaction.user_id}
-                      className={`${styles.post__img} ${styles["post__img--small"]}`}
-                      src={`/images/users/${reactionUser.photo}`}
-                      alt={reactionUser.name}
-                    />
-                  );
-                })}
+              {reactions.map((reaction) => {
+                const reactionUser = users.find(
+                  (u) => u.uuid === reaction.user_id
+                );
+                return (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    key={reaction.user_id}
+                    className={`${styles.post__img} ${styles["post__img--small"]}`}
+                    src={`/images/users/${reactionUser.photo}`}
+                    alt={reactionUser.name}
+                  />
+                );
+              })}
             </div>
           )}
           <p className={styles.post__likes}>
@@ -71,36 +95,27 @@ export default function Post(props) {
         </div>
         <div className={styles.post__action}>
           <Btn text="Reaccionar" type="text" modifier="action" />
-          <Btn text="Comentar" type="text" modifier="action" clickHandler={() => {
-            setTicketAreShown(!ticketAreShown);
-          }} />
+          <Btn
+            text="Comentar"
+            type="text"
+            modifier="action"
+            clickHandler={() => {
+              setTicketIsShown(!ticketIsShown);
+            }}
+          />
         </div>
       </div>
-      <div className={`${styles.post__comments} ${commentsShownClass}`}>
-        {comments &&
-          comments.length > 0 &&
-          comments.map((comment) => {
-            const commentUser = users.find((u) => u.uuid === comment.user_id);
-            return (
-              <div key={comment.timestamp} className={styles.post__comment}>
-                <img
-                  className={`${styles.post__img} ${styles["post__img--medium"]}`}
-                  src={`/images/users/${commentUser.photo}`}
-                  alt={commentUser.name}
-                />
-                {commentUser && <p className={styles.post__name}>{commentUser.name}</p>}
-                <p className={styles.post__text}>{comment.text}</p>
-                <Time timestamp={comment.timestamp} />
-              </div>
-            );
-          })}
-      </div>
-      <div className={`${styles.ticket} ${ticketShownClass}`}>
-        <Input
-          placeholder="Escribe un comentario"
-        />
-        <Btn text="Publicar" isSecondary />
-      </div>
-    </article >
+      <PostComments
+        commentsAreShown={commentsAreShown}
+        comments={comments}
+        users={users}
+      />
+      <PostFooter
+        ticketIsShown={ticketIsShown}
+        inputValue={newComment}
+        onChange={onChange}
+        onClick={publishComment}
+      />
+    </article>
   );
 }

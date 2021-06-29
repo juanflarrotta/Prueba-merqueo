@@ -43,11 +43,25 @@ export default function Home() {
       localStorage.setItem(DATA_KEYS.posts, JSON.stringify(posts));
     }
   }
+
+  function updatePost(id, data) {
+    const postToUpdate = posts.find((post) => post.uuid === id);
+    const newPost = {
+      ...postToUpdate,
+      comments: [...postToUpdate.comments, ...data.comments],
+    };
+    const newPosts = posts.map((post) => {
+      return post.uuid === id ? newPost : post;
+    });
+    updatePosts(newPosts);
+  }
+
   return (
     <DataContext.Provider
       value={{
         posts,
         updatePosts,
+        updatePost,
         currentUser,
         users,
       }}
