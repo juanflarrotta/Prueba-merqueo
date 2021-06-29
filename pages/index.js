@@ -21,7 +21,7 @@ const saveOnLS = (key, data) => {
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const currentUser = "8fd1-4d6e";
+  const [currentUser, setCurrentUser] = useState("8fd1-4d6e");
 
   useEffect(() => {
     saveOnLS(DATA_KEYS.users, defaultContext.users);
@@ -75,6 +75,7 @@ export default function Home() {
         updatePosts,
         updatePost,
         currentUser,
+        setCurrentUser,
         users,
       }}
     >

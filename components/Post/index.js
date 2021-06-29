@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import DataContext from "../../context";
 import Btn from "../Btn";
@@ -27,8 +27,14 @@ export default function Post(props) {
   const hasLikes = likes.length > 0;
   const likesCopy = `${likes.length} ${likes.length === 1 ? "like" : "likes"}`;
   const hasUserLiked =
-    hasReactions && reactions.find((r) => r.user_id === currentUser);
-  const [liked, setLiked] = useState(hasUserLiked);
+    hasReactions &&
+    reactions.find((r) => r.user_id === currentUser && r.type === "like");
+
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    setLiked(!!hasUserLiked);
+  }, [hasUserLiked]);
 
   const onChange = (e) => {
     const { value } = e.target;

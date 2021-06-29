@@ -31,7 +31,7 @@ export default function Ticket() {
   };
 
   function publishPost(e) {
-    if (text !== "") {
+    if (text !== "" && text.length <= 255) {
       const newPost = {
         uuid: generateUuid(),
         user: currentUser,
@@ -49,7 +49,7 @@ export default function Ticket() {
   return (
     <section className={`${styles.ticket} ${openClassName}`}>
       <Input
-        placeholder="Escribe Aquí tu estado"
+        placeholder="Escribe aquí tu estado"
         onBlur={onBlur}
         onFocus={onFocus}
         value={text}

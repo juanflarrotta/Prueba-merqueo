@@ -17,3 +17,19 @@
     }
   }
 }
+
+.inputWrapper {
+  position: relative;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.errorText {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  font-size: 10px;
+  color: red;
+}
