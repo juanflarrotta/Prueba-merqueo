@@ -48,7 +48,12 @@ export default function Home() {
     const postToUpdate = posts.find((post) => post.uuid === id);
     const newPost = {
       ...postToUpdate,
-      comments: [...postToUpdate.comments, ...data.comments],
+      comments: data.comments
+        ? [...postToUpdate.comments, ...data.comments]
+        : postToUpdate.comments,
+      reactions: data.reactions
+        ? [...postToUpdate.reactions, ...data.reactions]
+        : postToUpdate.reactions,
     };
     const newPosts = posts.map((post) => {
       return post.uuid === id ? newPost : post;

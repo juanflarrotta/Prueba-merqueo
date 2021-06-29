@@ -5,6 +5,8 @@ import Btn from "../Btn";
 import Time from "../Time";
 import PostFooter from "./postFooter";
 import PostComments from "./postComments";
+import PostReactions from "./postReactions";
+import PostReactionsBtn from "./postReactionsBtn";
 
 import styles from "./post.module.scss";
 
@@ -42,6 +44,17 @@ export default function Post(props) {
     }
   };
 
+  const updateReactions = (type) => {
+    updatePost(uuid, {
+      reactions: [
+        {
+          user_id: postUser.uuid,
+          type,
+        },
+      ],
+    });
+  };
+
   return (
     <article className={styles.post}>
       <div className={styles.post__content}>
@@ -60,24 +73,12 @@ export default function Post(props) {
           <p className={styles.post__text}>{text}</p>
         </div>
         <div className={styles.post__reaction}>
-          {hasReactions && (
-            <div className={styles.post__images}>
-              {reactions.map((reaction) => {
-                const reactionUser = users.find(
-                  (u) => u.uuid === reaction.user_id
-                );
-                return (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    key={reaction.user_id}
-                    className={`${styles.post__img} ${styles["post__img--small"]}`}
-                    src={`/images/users/${reactionUser.photo}`}
-                    alt={reactionUser.name}
-                  />
-                );
-              })}
-            </div>
-          )}
+          <PostReactions
+            hasReactions={hasReactions}
+            reactions={reactions}
+            users={users}
+          />
+
           <p className={styles.post__likes}>
             {hasReactions ? `${reactions.length} likes` : "No tiene likes"}
           </p>
@@ -94,11 +95,10 @@ export default function Post(props) {
           )}
         </div>
         <div className={styles.post__action}>
-          <Btn text="Reaccionar" type="text" modifier="action" />
+          <PostReactionsBtn updateReactions={updateReactions} />
           <Btn
             text="Comentar"
             type="text"
-            modifier="action"
             clickHandler={() => {
               setTicketIsShown(!ticketIsShown);
             }}
