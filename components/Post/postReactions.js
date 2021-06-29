@@ -9,9 +9,9 @@ export default function PostReactions(props) {
   return (
     hasReactions && (
       <div className={styles.post__images}>
-        {reactions.map((reaction) => {
+        {reactions.map((reaction, index) => {
           const reactionUser = users.find((u) => u.uuid === reaction.user_id);
-          return (
+          return index <= 2 ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               key={reaction.user_id}
@@ -19,7 +19,7 @@ export default function PostReactions(props) {
               src={`/images/users/${reactionUser.photo}`}
               alt={reactionUser.name}
             />
-          );
+          ) : null;
         })}
       </div>
     )

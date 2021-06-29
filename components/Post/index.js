@@ -14,13 +14,21 @@ export default function Post(props) {
   const { uuid, text, timestamp, reactions, comments, user } = props;
 
   const [commentsAreShown, setCommentsAreShown] = useState(false);
+  const [areReactionsShown, setAreReactionsShown] = useState(false);
+
   const [ticketIsShown, setTicketIsShown] = useState(false);
   const [newComment, setNewComment] = useState("");
-  const { users, updatePost } = useContext(DataContext);
+  const { users, updatePost, currentUser } = useContext(DataContext);
 
   const hasReactions = reactions && reactions.length > 0;
   const hasComments = comments && comments.length > 0;
   const postUser = users.find((u) => u.uuid === user);
+  const likes = hasReactions ? reactions.filter((r) => r.type === "like") : [];
+  const hasLikes = likes.length > 0;
+  const likesCopy = `${likes.length} ${likes.length === 1 ? "like" : "likes"}`;
+  const hasUserLiked =
+    hasReactions && reactions.find((r) => r.user_id === currentUser);
+  const [liked, setLiked] = useState(hasUserLiked);
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -29,15 +37,15 @@ export default function Post(props) {
 
   const publishComment = () => {
     if (newComment !== "") {
-      updatePost(uuid, {
-        comments: [
-          {
-            user_id: postUser.uuid,
-            timestamp: new Date().getTime(),
-            text: newComment,
-          },
-        ],
-      });
+      updatePost(
+        uuid,
+        {
+          user_id: postUser.uuid,
+          timestamp: new Date().getTime(),
+          text: newComment,
+        },
+        null
+      );
       setCommentsAreShown(true);
       setTicketIsShown(false);
       setNewComment("");
@@ -45,14 +53,12 @@ export default function Post(props) {
   };
 
   const updateReactions = (type) => {
-    updatePost(uuid, {
-      reactions: [
-        {
-          user_id: postUser.uuid,
-          type,
-        },
-      ],
+    setLiked(type === "like");
+    updatePost(uuid, null, {
+      user_id: currentUser,
+      type,
     });
+    setAreReactionsShown(false);
   };
 
   return (
@@ -80,7 +86,7 @@ export default function Post(props) {
           />
 
           <p className={styles.post__likes}>
-            {hasReactions ? `${reactions.length} likes` : "No tiene likes"}
+            {hasLikes ? likesCopy : "No tiene likes"}
           </p>
 
           {hasComments && (
@@ -95,7 +101,11 @@ export default function Post(props) {
           )}
         </div>
         <div className={styles.post__action}>
-          <PostReactionsBtn updateReactions={updateReactions} />
+          <PostReactionsBtn
+            updateReactions={updateReactions}
+            liked={liked}
+            isShown={areReactionsShown}
+          />
           <Btn
             text="Comentar"
             type="text"

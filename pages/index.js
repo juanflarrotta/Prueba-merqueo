@@ -44,16 +44,23 @@ export default function Home() {
     }
   }
 
-  function updatePost(id, data) {
+  function updatePost(id, comment, reaction) {
     const postToUpdate = posts.find((post) => post.uuid === id);
+    const hasUser = reaction
+      ? postToUpdate.reactions.find((r) => r.user_id === reaction.user_id)
+      : false;
+    const newReactions = hasUser
+      ? postToUpdate.reactions.map((r) => {
+          return r.user_id === reaction.user_id ? reaction : r;
+        })
+      : [...postToUpdate.reactions, reaction];
+
     const newPost = {
       ...postToUpdate,
-      comments: data.comments
-        ? [...postToUpdate.comments, ...data.comments]
+      comments: comment
+        ? [...postToUpdate.comments, comment]
         : postToUpdate.comments,
-      reactions: data.reactions
-        ? [...postToUpdate.reactions, ...data.reactions]
-        : postToUpdate.reactions,
+      reactions: reaction ? newReactions : postToUpdate.reactions,
     };
     const newPosts = posts.map((post) => {
       return post.uuid === id ? newPost : post;
