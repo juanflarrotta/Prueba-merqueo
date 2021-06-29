@@ -115,17 +115,21 @@
 }
 
 .ticket {
-  transition: all 0.25s;
+  //transition: visibility 0.5s, opacity 1s, height 0.25s;
   visibility: hidden;
   opacity: 0;
   height: 0;
+  padding: 0 20px;
 }
 
 .ticketShown {
-  height: auto;
+  transition: visibility 0.75s, opacity 0.75s, height 0.25s;
+  height: 124px;
   visibility: visible;
   opacity: 1;
-  padding: 20px;
+  input {
+    margin: 20px 20px 0 20px;
+  }
 }
 
 .reactionsWrapper {
@@ -146,7 +150,7 @@
   background-color: $gris-border;
   border-radius: 15px;
   opacity: 0;
-  transition: 0.25s opacity;
+  transition: 0.25s all;
 }
 
 .reactionsShown {
@@ -164,8 +168,8 @@
 
 .error {
   font-size: 10px;
-  background: #e91e63;
-  color: white;
+  background: $color-principal;
+  color: $blanco;
   text-align: left;
   padding: 0 15px;
   position: absolute;
