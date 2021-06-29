@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
 .date {
-    color: $gris-texto;
-    @include fontSize(0.65, 500);
+  color: $gris-texto;
+  @include fontSize(0.65, 500);
 }

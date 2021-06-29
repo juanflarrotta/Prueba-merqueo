@@ -1,12 +1,10 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-import { users, posts } from '../data/seed'
+import { users, posts } from "../data/seed";
 
 export const defaultContext = {
-    users,
-    posts
-}
+  users,
+  posts,
+};
 
 export default createContext(defaultContext);
-
-
