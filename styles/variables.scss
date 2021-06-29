@@ -1,0 +1,19 @@
+@function calculateRem($size) {
+    $remSize: $size % 16;
+    @return #{$remSize}rem;
+}
+
+@mixin fontSize($size, $weight) {
+    font-size  : $size * 16px; //Fallback in px
+    font-size  : calculateRem($size);
+    font-weight: $weight;
+}
+
+
+$gris-oscuro: #2e2e2e;
+$gris       : #e5e5e5;
+$blanco     : #ffffff;
+$box-shadow : rgba(110, 120, 130, 0.12);
+$gris-border: #f4f4f4;
+$gris-texto : #878787;
+$color-principal: #d00170;

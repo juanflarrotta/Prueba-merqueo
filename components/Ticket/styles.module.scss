@@ -1,0 +1,31 @@
+@import "../../styles/variables.scss";
+
+.ticket {
+    background-color: $blanco;
+    margin          : 0 20px 20px;
+    padding         : 20px;
+    border-radius   : 15px;
+    box-shadow      : 0px 8px 16px $box-shadow;
+    text-align      : center;
+    height          : 80px;
+    overflow        : hidden;
+    transition      : height 0.25s;
+
+    button {
+        opacity   : 0;
+        visibility: hidden;
+        height    : 0;
+        transition: height 0.25s, opacity 0.25s, visibility 0.25s;
+    }
+}
+
+.open {
+    height: 120px;
+
+    button {
+        opacity   : 1;
+        visibility: visible;
+        height    : 43px;
+        transition: opacity 0.5s;
+    }
+}

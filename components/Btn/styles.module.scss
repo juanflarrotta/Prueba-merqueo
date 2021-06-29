@@ -1,0 +1,40 @@
+@import "../../styles/variables.scss";
+
+.btn {
+    border          : 0;
+    background-color: transparent;
+    cursor          : pointer;
+
+    &__message {
+        color  : $gris-oscuro;
+        display: block;
+
+        &--publish {
+            background-color: $color-principal;
+            color           : $blanco;
+            margin-top      : 15px;
+            padding         : 5px 15px;
+            font-family     : "Open Sans", sans-serif;
+            @include fontSize(0.75, 400)
+        }
+
+        &--action {
+            @include fontSize(0.75, 600)
+        }
+
+        &--commentary {
+            color: $color-principal;
+            @include fontSize(0.75, 600)
+        }
+    }
+
+    &__icon {
+        display: block;
+
+        &--menu {
+            background: url(../../public/menu.svg) center/contain;
+            width     : 20px;
+            height    : 14px;
+        }
+    }
+}
