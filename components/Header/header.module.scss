@@ -101,8 +101,10 @@
   text-align: center;
   @include fontSize(1.75, 500);
   color: $main;
+  padding-top: 50px;
   @include break("mobile") {
     margin-left: 0;
+    padding-top: 0;
   }
 }
 
