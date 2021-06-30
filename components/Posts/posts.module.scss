@@ -2,4 +2,10 @@
 
 .posts {
   margin: 0 20px 20px;
+  overflow: hidden;
+  max-width: $max-width;
+  margin: 0 20px;
+  @include break("mobile") {
+    margin: 0 auto 20px auto;
+  }
 }

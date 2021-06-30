@@ -14,13 +14,14 @@
 }
 
 .primary {
-  color: $gris-oscuro;
+  color: $grey-dark;
   display: block;
+  font-weight: 600;
 }
 
 .secondary {
-  background-color: $color-principal;
-  color: $blanco;
+  background-color: $main;
+  color: $white;
   padding: 5px 15px;
   border-radius: 3px;
   margin-top: 15px;

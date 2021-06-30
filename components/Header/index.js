@@ -13,11 +13,9 @@ export default function Header() {
 
   return (
     <nav className={styles.navbar}>
-      <a className={styles.navbar__brand} href="#">
-        Merqueo Test
-      </a>
+      <h1 className={styles.navbar__brand}>Merqueo Test</h1>
       <div className={`${styles.headerMenu} ${openClass}`}>
-        {userData && <p>Hola {userData.name}!</p>}
+        {userData && <p className={styles.userActive}>Hola {userData.name}!</p>}
         {users && (
           <div className={styles.users}>
             <p>¿Quieres cambiar de usuario?</p>

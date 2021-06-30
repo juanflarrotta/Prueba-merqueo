@@ -3,19 +3,19 @@
 .post {
   text-align: center;
   margin-bottom: 20px;
-  background-color: $gris-border;
+  background-color: $grey-light;
   border-radius: 15px;
   position: relative;
 
   &__content {
-    background-color: $blanco;
+    background-color: $white;
     box-shadow: 0px 8px 16px $box-shadow;
     border-radius: 15px;
     padding: 20px;
   }
 
   &__comments {
-    transition: all 0.25s;
+    transition: all $anim-fast;
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -48,7 +48,7 @@
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    border: 1px solid $gris-border;
+    border: 1px solid $grey-light;
 
     &--small {
       width: 20px;
@@ -63,12 +63,12 @@
   }
 
   &__name {
-    color: $color-principal;
+    color: $main;
     @include fontSize(1, bold);
   }
 
   &__text {
-    color: $gris-texto;
+    color: $grey-middle;
     @include fontSize(0.75, 500);
   }
 
@@ -76,6 +76,9 @@
     display: flex;
     align-items: center;
     padding: 10px;
+    button {
+      color: $main;
+    }
   }
 
   &__commentary {
@@ -84,7 +87,7 @@
   }
 
   &__action {
-    border-top: 1px solid $gris-border;
+    border-top: 1px solid $grey-light;
     display: flex;
     justify-content: space-between;
     padding: 15px 10px 0;
@@ -104,7 +107,7 @@
     flex: 1;
     text-align: left;
     @include fontSize(0.75, 700);
-    color: $color-principal;
+    color: $main;
   }
 }
 
@@ -115,21 +118,23 @@
 }
 
 .ticket {
-  //transition: visibility 0.5s, opacity 1s, height 0.25s;
+  transition: visibility $anim-low, opacity $anim-low, height $anim-fast,
+    padding $anim-low;
   visibility: hidden;
   opacity: 0;
   height: 0;
   padding: 0 20px;
+  input {
+    margin: 20px auto 0;
+  }
 }
 
 .ticketShown {
-  transition: visibility 0.75s, opacity 0.75s, height 0.25s;
+  transition: visibility $anim-low, opacity $anim-low, height $anim-fast,
+    padding $anim-low;
   height: 124px;
   visibility: visible;
   opacity: 1;
-  input {
-    margin: 20px 20px 0 20px;
-  }
 }
 
 .reactionsWrapper {
@@ -147,10 +152,10 @@
   position: absolute;
   top: -30px;
   left: -30px;
-  background-color: $gris-border;
+  background-color: $grey-light;
   border-radius: 15px;
   opacity: 0;
-  transition: 0.25s all;
+  transition: $anim-fast all;
 }
 
 .reactionsShown {
@@ -168,8 +173,8 @@
 
 .error {
   font-size: 10px;
-  background: $color-principal;
-  color: $blanco;
+  background: $main;
+  color: $white;
   text-align: left;
   padding: 0 15px;
   position: absolute;

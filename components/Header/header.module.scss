@@ -6,17 +6,22 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: $blanco;
+  background-color: $white;
   height: 64px;
   box-shadow: 0px 8px 16px $box-shadow;
   border-radius: 0px 0px 15px 15px;
   align-items: center;
   padding: 20px;
-  margin-bottom: 20px;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  margin: 0;
+  z-index: 99;
   &__brand {
     grid-area: 1 / 2 / 2 / 5;
     @include fontSize(1, 700);
+    text-align: center;
   }
 
   button {
@@ -30,26 +35,80 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 100vh;
-  width: 500px;
-  background: white;
-  padding: 32px 16px;
-  z-index: 1;
+  background: transparent;
+  z-index: 100;
   transform: translateX(100%);
-  transition: transform 0.25s;
+  transition: all $anim-fast;
+  opacity: 0;
+  visibility: hidden;
+  height: 100vh;
+  width: 100vw;
 
+  @include break("mobile") {
+    width: 300px;
+  }
   span {
     position: absolute;
     right: 16px;
     top: 16px;
     cursor: pointer;
+    @include fontSize(0.75, 700);
   }
 }
 
 .users {
-  font-size: 12px;
+  @include fontSize(0.75, 500);
+  margin-left: 30vw;
+  box-shadow: 0px 8px 16px $box-shadow;
+  background: $white;
+  p {
+    @include fontSize(1.75, bold);
+    text-align: center;
+    padding: 0 15px;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    li {
+      cursor: pointer;
+      padding: 5px 0px;
+      width: 200px;
+      height: 200px;
+      box-shadow: 0px 8px 16px $box-shadow;
+      margin-top: 20px;
+      background-color: $main-shadow;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 200px;
+      @include fontSize(1.75, 500);
+      &:hover {
+        color: $main;
+      }
+    }
+  }
+  @include break("mobile") {
+    margin-left: 0;
+  }
+}
+.userActive {
+  margin-left: 30vw;
+  box-shadow: 0px 8px 16px $box-shadow;
+  background: $white;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  @include fontSize(1.75, 500);
+  color: $main;
+  @include break("mobile") {
+    margin-left: 0;
+  }
 }
 
 .open {
   transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  transition: all $anim-fast;
 }

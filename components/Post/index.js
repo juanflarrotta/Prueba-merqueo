@@ -97,7 +97,9 @@ export default function Post(props) {
 
           {hasComments && (
             <Btn
-              text={`${comments.length} comentarios`}
+              text={`${comments.length} ${
+                comments.length === 1 ? "comentario" : "comentarios"
+              }`}
               type="text"
               modifier="commentary"
               clickHandler={() => {
